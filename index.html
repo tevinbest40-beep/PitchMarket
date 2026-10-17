@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071426">
+  <title>PitchMarket | eFootball Accounts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">⚽</span>
+      <span>Pitch<span class="green">Market</span></span>
+    </a>
+    <div class="header-actions">
+      <span id="auth-status">Not logged in</span>
+      <button id="logout-btn" class="btn btn-outline hidden">Log out</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">THE eFOOTBALL MARKETPLACE</p>
+      <h1>Find your next <span class="green">dream squad.</span></h1>
+      <p>Browse accounts, compare squads, and contact sellers directly.</p>
+      <a href="#marketplace" class="btn btn-primary">Explore accounts ↓</a>
+    </section>
+
+    <section class="panel auth-panel" id="auth-panel">
+      <div>
+        <p class="eyebrow">SELL ON PITCHMARKET</p>
+        <h2>Seller account</h2>
+        <p class="muted">Register or log in to post and manage your listings.</p>
+      </div>
+
+      <form id="auth-form">
+        <label for="auth-email">Email address</label>
+        <input id="auth-email" type="email" placeholder="you@example.com" required>
+
+        <label for="auth-password">Password</label>
+        <input id="auth-password" type="password" minlength="6"
+               placeholder="At least 6 characters" required>
+
+        <div class="button-row">
+          <button class="btn btn-primary" type="submit" id="login-btn">Log in</button>
+          <button class="btn btn-outline" type="button" id="register-btn">Register</button>
+        </div>
+        <p id="auth-message" class="message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel hidden" id="seller-panel">
+      <p class="eyebrow">YOUR STORE</p>
+      <h2 id="listing-form-heading">Post an account</h2>
+      <form id="listing-form">
+        <input id="listing-id" type="hidden">
+
+        <div class="form-grid">
+          <div>
+            <label for="listing-title">Listing title *</label>
+            <input id="listing-title" maxlength="100" required
+                   placeholder="eFootball account — Epic squad">
+          </div>
+          <div>
+            <label for="listing-price">Price (KSh) *</label>
+            <input id="listing-price" type="number" min="1" step="1"
+                   required placeholder="1500">
+          </div>
+          <div>
+            <label for="seller-name">Your display name *</label>
+            <input id="seller-name" required maxlength="80"
+                   placeholder="Your seller name">
+          </div>
+          <div>
+            <label for="seller-phone">Your phone number *</label>
+            <input id="seller-phone" required type="tel" maxlength="20"
+                   placeholder="07XXXXXXXX or 2547XXXXXXXX">
+          </div>
+          <div>
+            <label for="team-strength">Team strength</label>
+            <input id="team-strength" type="number" min="0" max="9999"
+                   placeholder="3200">
+          </div>
+          <div>
+            <label for="listing-platform">Platform *</label>
+            <select id="listing-platform" required>
+              <option value="Android">Android</option>
+              <option value="iOS">iOS</option>
+              <option value="PlayStation">PlayStation</option>
+              <option value="PC">PC</option>
+              <option value="Xbox">Xbox</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="full-width">
+            <label for="listing-players">Notable players</label>
+            <input id="listing-players" placeholder="e.g. Messi, Mbappé, Neymar">
+          </div>
+          <div class="full-width">
+            <label for="listing-description">Description</label>
+            <textarea id="listing-description" rows="3"
+                      placeholder="Describe the squad and account..."></textarea>
+          </div>
+          <div class="full-width">
+            <label for="listing-image">Account screenshot</label>
+            <input id="listing-image" type="file" accept="image/*">
+            <small class="muted">Use a screenshot that does not reveal passwords, email inboxes, recovery codes or other private information. Maximum 5 MB.</small>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" type="submit" id="save-listing-btn">Publish listing</button>
+          <button class="btn btn-outline hidden" type="button" id="cancel-edit-btn">Cancel edit</button>
+        </div>
+        <p id="listing-message" class="message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="marketplace" class="market-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">TRANSFER MARKET</p>
+          <h2>Available accounts</h2>
+        </div>
+        <span id="listing-count" class="count">Loading...</span>
+      </div>
+
+      <div class="filters">
+        <input id="search-input" type="search"
+               placeholder="Search title, players or seller...">
+        <select id="platform-filter">
+          <option value="">All platforms</option>
+          <option value="Android">Android</option>
+          <option value="iOS">iOS</option>
+          <option value="PlayStation">PlayStation</option>
+          <option value="PC">PC</option>
+          <option value="Xbox">Xbox</option>
+          <option value="Other">Other</option>
+        </select>
+        <select id="sort-filter">
+          <option value="newest">Newest first</option>
+          <option value="price-low">Price: low to high</option>
+          <option value="price-high">Price: high to low</option>
+        </select>
+      </div>
+
+      <p id="market-message" class="message" aria-live="polite"></p>
+      <div id="listings-grid" class="listings-grid"></div>
+    </section>
+
+    <section class="notice">
+      <strong>Buy safely</strong>
+      <p>Check an account carefully before paying. Never share your own passwords or recovery codes. Account transfers may carry risks and may be restricted by the game's terms. PitchMarket does not hold payments or guarantee a transaction.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>⚽ PitchMarket · Built for the eFootball community</p>
+    <p class="muted">Buyers contact sellers directly. Verify every deal yourself.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
