@@ -1,4 +1,46 @@
 :root {
+  
+.security-notice {
+  margin: 20px 0;
+  padding: 18px;
+  border: 1px solid #ff334f;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #260910, #120b12);
+  box-shadow:
+    0 0 8px rgba(255, 35, 65, 0.45),
+    0 0 22px rgba(255, 35, 65, 0.18);
+  animation: securityGlow 2s ease-in-out infinite alternate;
+}
+
+.security-notice-title {
+  color: #ff5267;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.security-notice p {
+  color: #ffffff;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.security-notice small {
+  color: #e5b7bf;
+  line-height: 1.5;
+}
+
+@keyframes securityGlow {
+  from {
+    box-shadow: 0 0 6px rgba(255, 35, 65, 0.3);
+  }
+  to {
+    box-shadow:
+      0 0 14px rgba(255, 35, 65, 0.6),
+      0 0 28px rgba(255, 35, 65, 0.25);
+  }
+}
+  
   --bg: #071426;
   --panel: #0d1e33;
   --panel-light: #132941;
