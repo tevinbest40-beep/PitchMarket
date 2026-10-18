@@ -267,6 +267,21 @@ function renderListings() {
     const whatsapp = phone
       ? `https://wa.me/${phone}?text=${encodeURIComponent("Hi, I'm interested in your PitchMarket listing: " + item.title)}`
       : "";
+    const listingReviews = state.reviews.filter(
+  review => review.listing_id === item.id
+);
+
+const averageRating = listingReviews.length
+  ? listingReviews.reduce((sum, review) => sum + review.rating, 0) /
+    listingReviews.length
+  : 0;
+
+const ratingDisplay = listingReviews.length
+  ? `<div class="review-summary">
+       <span class="review-stars">★ ${averageRating.toFixed(1)} / 5</span>
+       <span class="review-count">(${listingReviews.length} review${listingReviews.length === 1 ? "" : "s"})</span>
+     </div>`
+  : `<div class="review-summary">No ratings yet</div>`;
 
     return `
       <article class="listing-card">
@@ -277,6 +292,7 @@ function renderListings() {
             ${item.team_strength != null
               ? `<span class="strength-tag">Team ${escapeHTML(item.team_strength)}</span>` : ""}
           </div>
+          ${ratingDisplay}
           <h3>${escapeHTML(item.title)}</h3>
           <p class="listing-price">KSh ${Number(item.price).toLocaleString("en-KE")}</p>
           ${item.players ? `<p><strong>Players:</strong> ${escapeHTML(item.players)}</p>` : ""}
