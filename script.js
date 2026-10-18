@@ -4,7 +4,7 @@ const db = window.supabase.createClient(
 );
 
 const $ = id => document.getElementById(id);
-const state = { user: null, listings: [], imageUrl: "", busy: false };
+const state = { user: null, listings: [],reviews: [], imageUrl: "", busy: false };
 
 function message(id, text, error = false) {
   const el = $(id);
