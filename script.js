@@ -293,6 +293,23 @@ const ratingDisplay = listingReviews.length
               ? `<span class="strength-tag">Team ${escapeHTML(item.team_strength)}</span>` : ""}
           </div>
           ${ratingDisplay}
+          ${state.user && state.role === "buyer" && !isOwner ? `
+  <form class="review-form" data-review-form="${escapeHTML(item.id)}">
+    <label for="rating-${escapeHTML(item.id)}">Rate this squad</label>
+    <select id="rating-${escapeHTML(item.id)}" name="rating" required>
+      <option value="">Choose stars</option>
+      <option value="5">★★★★★ — Excellent</option>
+      <option value="4">★★★★ — Good</option>
+      <option value="3">★★★ — Average</option>
+      <option value="2">★★ — Poor</option>
+      <option value="1">★ — Very poor</option>
+    </select>
+    <textarea name="review_text" minlength="5" maxlength="1000"
+      placeholder="Write your review (5–1000 characters)" required></textarea>
+    <button class="btn btn-primary" type="submit">Submit review</button>
+    <p class="review-message" aria-live="polite"></p>
+  </form>
+` : ""}
           <h3>${escapeHTML(item.title)}</h3>
           <p class="listing-price">KSh ${Number(item.price).toLocaleString("en-KE")}</p>
           ${item.players ? `<p><strong>Players:</strong> ${escapeHTML(item.players)}</p>` : ""}
