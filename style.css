@@ -463,3 +463,20 @@ footer p { margin: 5px; }
     transition: none !important;
   }
 }
+.review-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 6px 0 12px;
+  font-size: 0.9rem;
+}
+
+.review-stars {
+  color: #ffc857;
+  font-weight: 700;
+}
+
+.review-count {
+  color: var(--muted);
+}
