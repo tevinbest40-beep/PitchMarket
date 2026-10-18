@@ -412,6 +412,68 @@ $("listings-grid").addEventListener("click", async event => {
     await loadListings();
   }
 });
+$("listings-grid").addEventListener("submit", async event => {
+  const form = event.target.closest("[data-review-form]");
+  if (!form) return;
+
+  event.preventDefault();
+
+  const button = form.querySelector('button[type="submit"]');
+  const output = form.querySelector(".review-message");
+  const listingId = form.dataset.reviewForm;
+  const rating = Number(form.elements.rating.value);
+  const reviewText = form.elements.review_text.value.trim();
+
+  if (!state.user || state.role !== "buyer") {
+    output.textContent = "Please sign in with a buyer account to review.";
+    return;
+  }
+
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+    output.textContent = "Please choose a rating from 1 to 5 stars.";
+    return;
+  }
+
+  if (reviewText.length < 5 || reviewText.length > 1000) {
+    output.textContent = "Your review must be 5–1000 characters.";
+    return;
+  }
+
+  button.disabled = true;
+  output.textContent = "Submitting review...";
+
+  try {
+    const listing = state.listings.find(item => item.id === listingId);
+
+    if (!listing || listing.seller_id === state.user.id) {
+      output.textContent = "You cannot review this listing.";
+      return;
+    }
+
+    const { error } = await db.from("listing_reviews").insert({
+      listing_id: listing.id,
+      seller_id: listing.seller_id,
+      reviewer_id: state.user.id,
+      rating,
+      review_text: reviewText
+    });
+
+    if (error) {
+      if (error.code === "23505") {
+        output.textContent = "You've already reviewed this squad.";
+      } else {
+        output.textContent = error.message || "Could not submit review.";
+      }
+      return;
+    }
+
+    await loadReviews();
+    renderListings();
+    message("market-message", "Review submitted successfully!");
+  } finally {
+    button.disabled = false;
+  }
+});
 
 db.auth.onAuthStateChange((_event, session) => {
   state.user = session?.user || null;
