@@ -295,7 +295,19 @@ function renderListings() {
       </article>`;
   }).join("");
 }
+async function loadReviews() {
+  const { data, error } = await db
+    .from("listing_reviews")
+    .select("listing_id, seller_id, rating, review_text, created_at");
 
+  if (error) {
+    console.error("Could not load reviews:", error.message);
+    state.reviews = [];
+    return;
+  }
+
+  state.reviews = data || [];
+}
 async function loadListings() {
   $("listings-grid").innerHTML = '<p class="empty-state">Loading accounts...</p>';
 
@@ -313,7 +325,8 @@ async function loadListings() {
   }
 
   state.listings = data || [];
-  renderListings();
+await loadReviews();
+renderListings();
 }
 
 $("search-input").addEventListener("input", renderListings);
