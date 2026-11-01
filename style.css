@@ -509,4 +509,200 @@ body {
   border-color: #168bff;
   box-shadow: 0 0 16px rgba(22, 139, 255, 0.4);
            }
+
+/* PITCHMARKET CYBER NEON HERO */
+.cyber-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 340px;
+  margin: 22px 0 30px;
+  padding: clamp(30px, 6vw, 64px) 22px;
+  border: 1px solid rgba(0, 160, 255, 0.9);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 80% 15%, rgba(0, 153, 255, 0.28), transparent 38%),
+    radial-gradient(ellipse at 15% 85%, rgba(0, 75, 255, 0.2), transparent 40%),
+    linear-gradient(135deg, #030916, #07172c 55%, #020712);
+  box-shadow: 0 0 18px rgba(0, 140, 255, 0.45),
+    inset 0 0 28px rgba(0, 110, 255, 0.15);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.hero-tag {
+  display: inline-block;
+  color: #8ddcff;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  border: 1px solid rgba(0, 174, 255, 0.65);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(0, 130, 255, 0.12);
+  box-shadow: 0 0 12px rgba(0, 150, 255, 0.25);
+}
+
+.cyber-hero h1 {
+  margin: 22px 0 12px;
+  font-size: clamp(2.5rem, 9vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 140, 255, 0.8),
+    0 0 28px rgba(0, 110, 255, 0.45);
+}
+
+.cyber-hero h1 span {
+  color: #35b9ff;
+  text-shadow: 0 0 8px #008dff, 0 0 24px rgba(0, 130, 255, 0.85);
+}
+
+.hero-subtitle {
+  margin: 12px 0 8px;
+  color: #b9eaff;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.hero-description {
+  max-width: 560px;
+  color: #c4d7eb;
+  line-height: 1.7;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 13px 20px;
+  border: 1px solid #45c3ff;
+  border-radius: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 800;
+  background: linear-gradient(90deg, #006aff, #009dff);
+  box-shadow: 0 0 14px rgba(0, 145, 255, 0.65);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px rgba(0, 170, 255, 0.9);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.28;
+  background-image:
+    linear-gradient(rgba(0, 145, 255, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 145, 255, 0.25) 1px, transparent 1px);
+  background-size: 34px 34px;
+  animation: heroGridMove 18s linear infinite;
+  pointer-events: none;
+}
+
+.hero-orb {
+  position: absolute;
+  z-index: 1;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-orb-one {
+  width: 210px;
+  height: 210px;
+  right: 7%;
+  top: 10%;
+  border: 1px solid rgba(0, 180, 255, 0.7);
+  box-shadow: 0 0 22px rgba(0, 145, 255, 0.3),
+    inset 0 0 20px rgba(0, 145, 255, 0.2);
+  animation: heroOrbPulse 4s ease-in-out infinite;
+}
+
+.hero-orb-two {
+  width: 130px;
+  height: 130px;
+  right: 11%;
+  top: 22%;
+  border: 1px solid rgba(100, 220, 255, 0.7);
+  box-shadow: 0 0 18px rgba(0, 145, 255, 0.4);
+  animation: heroOrbPulse 3s ease-in-out infinite reverse;
+}
+
+.hero-scanline {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: -3px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #4edaff, transparent);
+  box-shadow: 0 0 18px #00aaff;
+  opacity: 0.85;
+  animation: heroScan 5s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes heroGridMove {
+  to { background-position: 34px 34px; }
+}
+
+@keyframes heroOrbPulse {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes heroScan {
+  to { top: 100%; }
+}
+
+@media (max-width: 600px) {
+  .cyber-hero {
+    min-height: 300px;
+    padding: 32px 18px;
+  }
+
+  .hero-orb-one {
+    width: 130px;
+    height: 130px;
+    right: -15px;
+    top: 12%;
+    opacity: 0.55;
+  }
+
+  .hero-orb-two {
+    width: 85px;
+    height: 85px;
+    right: 12px;
+    top: 24%;
+    opacity: 0.45;
+  }
+
+  .hero-description {
+    max-width: 85%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid,
+  .hero-orb-one,
+  .hero-orb-two,
+  .hero-scanline {
+    animation: none;
+  }
+
+  .hero-button {
+    transition: none;
+  }
+    }
+  
   
